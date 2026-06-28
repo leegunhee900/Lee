@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>국민연금 직무시험 대비 45문제</title>
+<style>
+:root{--main:#0f766e;--bg:#f6f8f7;--card:#fff;--ok:#15803d;--bad:#b91c1c;--muted:#64748b;--line:#d9e2df}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#17212b}
+header{background:var(--main);color:white;padding:18px 16px;text-align:center;position:sticky;top:0;z-index:5} h1{font-size:20px;margin:0 0 6px} header p{margin:0;font-size:13px;opacity:.92}
+.wrap{max-width:920px;margin:0 auto;padding:16px}.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:0 6px 18px rgba(15,118,110,.07)}
+.meta{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.meta div{background:#eef7f5;border-radius:12px;padding:10px;text-align:center;font-size:13px}.meta b{display:block;font-size:20px;color:var(--main)}
+.nav{display:flex;gap:8px;flex-wrap:wrap}.nav button{width:38px;height:34px;border-radius:10px;border:1px solid #cbd5d1;background:#fff}.nav button.active{background:var(--main);color:#fff}.nav button.done{border-color:var(--main);font-weight:700}
+.qhead{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}.tag{font-size:12px;color:white;background:#334155;padding:4px 8px;border-radius:999px;white-space:nowrap}.scoretag{background:#0f766e}.question{font-size:18px;font-weight:800;line-height:1.45;margin:12px 0 14px}.opts{display:grid;gap:9px}.opt{border:1px solid #cbd5d1;background:#fff;border-radius:12px;padding:12px;text-align:left;font-size:15px;line-height:1.45}.opt:hover{border-color:var(--main)}.opt.selected{border:2px solid var(--main);background:#eef7f5}.opt.correct{border-color:var(--ok);background:#ecfdf5}.opt.wrong{border-color:var(--bad);background:#fef2f2}
+input[type=text]{width:100%;font-size:17px;padding:12px;border-radius:12px;border:1px solid #cbd5d1}.controls{display:flex;gap:8px;margin-top:14px}.controls button,.submit{border:0;background:var(--main);color:#fff;border-radius:12px;padding:12px 14px;font-weight:800}.controls button.secondary{background:#475569}.controls button:disabled{opacity:.45}.explain{margin-top:12px;padding:12px;border-radius:12px;background:#f8fafc;border:1px solid #e2e8f0;display:none}.explain.ok{display:block;border-color:#bbf7d0}.explain.bad{display:block;border-color:#fecaca}.result{font-size:18px;line-height:1.6}.result b{color:var(--main)}.small{font-size:13px;color:var(--muted);line-height:1.5} footer{text-align:center;color:var(--muted);font-size:12px;padding:24px}
+@media(max-width:620px){.meta{grid-template-columns:repeat(2,1fr)}.question{font-size:16px}.wrap{padding:10px}.panel{border-radius:14px;padding:13px}.opt{font-size:14px}.controls button{flex:1}}
+</style>
+</head>
+<body>
+<header><h1>국민연금 직무시험 대비 45문제</h1><p>객관식 40문제 × 2점 + 주관식 5문제 × 4점 = 총 100점</p></header>
+<div class="wrap">
+<section class="panel meta">
+<div><b id="curNo">1</b>현재 문제</div><div><b id="answered">0</b>답변 완료</div><div><b id="totalScore">100</b>총점</div><div><b id="timer">60:00</b>남은 시간</div>
+</section>
+<section class="panel"><div class="small">문제 번호를 눌러 이동할 수 있습니다. 객관식은 선택 즉시 정오답 해설이 표시되고, 주관식은 한 단어로 입력 후 확인하세요.</div><br><div class="nav" id="nav"></div></section>
+<section class="panel" id="quiz"></section>
+<section class="panel" id="result" style="display:none"></section>
+<footer>GitHub Pages 업로드용 단일 HTML 파일</footer>
+</div>
+<script>
+const questions = [
+{type:'mc',score:2,q:'국민연금 가입대상이 되기 위한 기본 요건으로 옳은 것은?',opts:['국내 거주, 대한민국 국민, 18세 이상 60세 미만','국내 거주, 외국인 제외, 20세 이상 65세 미만','대한민국 국민, 소득 보유, 18세 이상 65세 미만','국내 사업장 근무, 15세 이상 60세 미만'],a:0,exp:'국민연금 기본 가입대상은 국내 거주, 대한민국 국민, 18세 이상 60세 미만입니다.'},
+{type:'mc',score:2,q:'국민연금 가입자의 종류 중 당연적용 가입자에 해당하는 것은?',opts:['임의가입자와 임의계속가입자','사업장가입자와 지역가입자','노령연금 수급자와 반환일시금 수급자','기초수급자와 무소득 배우자'],a:1,exp:'당연적용 가입자는 사업장가입자와 지역가입자입니다.'},
+{type:'mc',score:2,q:'임의계속가입자의 기본 연령 요건으로 옳은 것은?',opts:['18세 미만인 자','18세 이상 27세 미만인 자','60세가 된 자로서 65세가 될 때까지 신청 가능','65세 이상이면 누구나 신청 가능'],a:2,exp:'임의계속가입자는 가입자였던 자가 60세가 된 뒤 65세가 될 때까지 신청할 수 있습니다.'},
+{type:'mc',score:2,q:'당연적용사업장의 설명으로 옳은 것은?',opts:['5인 이상 근로자를 사용하는 사업장','1인 이상의 근로자를 사용하는 사업장','법인사업장만 해당','개인사업장은 제외'],a:1,exp:'당연적용사업장은 1인 이상의 근로자를 사용하는 사업장입니다.'},
+{type:'mc',score:2,q:'사업장 적용 신고기한으로 옳은 것은?',opts:['사유발생일 당일','사유발생일이 속하는 달의 다음 달 15일까지','사유발생일이 속하는 달의 말일까지','다음 분기 10일까지'],a:1,exp:'당연적용 사업장 해당일이 속하는 달의 다음 달 15일까지 신고합니다.'},
+{type:'mc',score:2,q:'사업장 탈퇴일 결정 기준으로 옳지 않은 것은?',opts:['휴업: 휴업일 당일','폐업: 폐업일 다음 날','최종 근로자 퇴사: 퇴사일의 다음 날','통·폐합: 통·폐합일의 다음 달 15일'],a:3,exp:'통·폐합은 사업장 통·폐합일이 탈퇴일입니다. 다음 달 15일은 신고기한과 관련됩니다.'},
+{type:'mc',score:2,q:'사업장가입자 취득 대상에 대한 설명으로 옳은 것은?',opts:['당연적용 사업장에 종사하는 18세 이상 60세 미만 근로자와 사용자','모든 65세 이상 근로자','무소득 배우자 전원','노령연금 수급자 전원'],a:0,exp:'사업장가입자 취득 대상은 당연적용 사업장에 종사하는 18세 이상 60세 미만 근로자와 사용자입니다.'},
+{type:'mc',score:2,q:'사업장가입자 자격 취득 시기 중 “당연적용 사업장에 근로자로 종사하게 된 때”의 취득일은?',opts:['종사시작일','다음 달 1일','신고일','납부기한일'],a:0,exp:'근로자 또는 사용자로 종사하게 된 때에는 종사시작일, 즉 고용일이 취득일입니다.'},
+{type:'mc',score:2,q:'사업장가입자 자격 상실 사유와 상실일 연결이 옳은 것은?',opts:['사망 - 사망일 당일','60세 도달 - 60세 생일 전날','사용관계 종료 - 종료일 당일','국적상실 - 신청일'],a:1,exp:'60세 도달 시 사업장가입자 상실일은 60세 생일 전날입니다.'},
+{type:'mc',score:2,q:'기준소득월액의 설명으로 옳은 것은?',opts:['연금보험료와 급여 산정을 위해 소득월액을 기준으로 정하는 금액','모든 가입자에게 동일하게 적용되는 금액','반환일시금만 산정하는 기준금액','지역가입자에게는 적용되지 않는 금액'],a:0,exp:'기준소득월액은 보험료와 급여 산정의 기준이 되는 금액입니다.'},
+{type:'mc',score:2,q:'2026.7.1.~2027.6.30. 적용 기준소득월액 상한액은?',opts:['41만원','270만원','659만원','1,680만원'],a:2,exp:'해당 기간 기준소득월액 상한액은 659만원, 하한액은 41만원입니다.'},
+{type:'mc',score:2,q:'기준소득월액 특례 신청 대상은?',opts:['실제 소득이 기준소득월액 대비 20% 이상 변동된 사용자·근로자','모든 지역가입자','18세 미만 근로자만','기초연금 수급자만'],a:0,exp:'특례는 실제 소득이 기준소득월액 대비 20% 이상 변동된 경우에 해당합니다.'},
+{type:'mc',score:2,q:'둘 이상 적용 사업장가입자의 기준소득월액 조정 원칙으로 옳은 것은?',opts:['각 사업장 금액 합이 상한액을 초과하지 않도록 조정','가장 높은 사업장 하나만 고지','무조건 하한액으로 통일','사용자가 임의로 선택'],a:0,exp:'여러 사업장의 기준소득월액 합이 상한액을 초과하지 않도록 사업장별 비율로 조정합니다.'},
+{type:'mc',score:2,q:'사업장가입자 납부예외 사유에 해당하지 않는 것은?',opts:['휴직','군 복무','재학','소득 증가'],a:3,exp:'납부예외는 보험료를 낼 수 없는 사유이며 소득 증가는 납부예외 사유가 아닙니다.'},
+{type:'mc',score:2,q:'가입기간 계산에 대한 설명으로 옳은 것은?',opts:['연금보험료를 내지 않은 납부예외 기간은 원칙적으로 미산입','모든 납부예외 기간은 자동 산입','취득달에 상실하면 항상 산입','상실일 이후 달까지 산입'],a:0,exp:'납부예외 기간은 원칙적으로 가입기간에서 제외됩니다.'},
+{type:'mc',score:2,q:'지역가입자에 대한 설명으로 옳은 것은?',opts:['사업장가입자가 아닌 국내 거주 국민 중 18세 이상 60세 미만인 자','법인 대표자만 해당','60세 이상 국민 전원','소득이 없는 배우자는 항상 지역가입자'],a:0,exp:'지역가입자는 국내 거주 국민으로서 18세 이상 60세 미만 중 사업장가입자가 아닌 자입니다.'},
+{type:'mc',score:2,q:'지역가입 제외자에 해당하는 것은?',opts:['사업장가입자가 아닌 모든 자','기초수급자 중 생계·의료·보장시설급여 수급자','소득 있는 30세 자영업자','근로소득이 있는 45세 프리랜서'],a:1,exp:'생계급여·의료급여·보장시설급여 수급자는 지역가입 제외자에 해당합니다.'},
+{type:'mc',score:2,q:'지역가입자 자격 취득 사유와 취득일 연결이 옳은 것은?',opts:['사업장가입자 자격 상실 - 상실일','타공적연금가입자 자격 상실 - 신청일','기초수급 중지 - 중지일 당일','27세 미만자가 27세 이상 - 다음 달 1일'],a:0,exp:'사업장가입자 자격 상실 시 지역가입자 취득일은 상실일입니다.'},
+{type:'mc',score:2,q:'지역가입자 자격 상실 사유와 상실일 연결이 옳은 것은?',opts:['사망 - 사망일의 다음 날','60세 도달 - 60세 생일 전날','기초수급 책정 - 다음 달 1일','국외이주 - 신고일 전날'],a:0,exp:'지역가입자가 사망한 경우 상실일은 사망일의 다음 날입니다.'},
+{type:'mc',score:2,q:'지역가입자의 기준소득월액 변경 신청은 언제부터 적용되는가?',opts:['신청일 당일','신청일 속한 달의 다음 달부터','전년도 1월부터 소급','납부기한 다음 날부터'],a:1,exp:'지역가입자의 기준소득월액 변경 신청은 신청일이 속한 달의 다음 달부터 적용되며 소급은 불가합니다.'},
+{type:'mc',score:2,q:'지역가입자 납부예외 7개 사유에 포함되지 않는 것은?',opts:['사업중단·실직·휴직','병역의무 수행','학교 재학','자동이체 신청'],a:3,exp:'자동이체 신청은 납부예외 사유가 아닙니다.'},
+{type:'mc',score:2,q:'임의가입자가 될 수 없는 자로 옳은 것은?',opts:['타공적연금 가입자','소득 없는 기초수급자','18세 이상 60세 미만 국민','사업장·지역가입자가 아닌 자'],a:0,exp:'타공적연금 가입자는 임의가입자가 될 수 없습니다.'},
+{type:'mc',score:2,q:'임의가입자 탈퇴 신청 시 상실일은?',opts:['탈퇴신청일 당일','탈퇴신청일의 다음 날','다음 달 1일','최종납부월의 말일만 가능'],a:1,exp:'임의가입자는 탈퇴 신청 시 탈퇴신청일의 다음 날 상실합니다.'},
+{type:'mc',score:2,q:'연금보험료 산정식으로 옳은 것은?',opts:['기준소득월액 × 연금보험료율','기본연금액 × 가입기간','A값 × B값','소득총액 ÷ 가입월수'],a:0,exp:'연금보험료는 기준소득월액에 연금보험료율을 곱해 산정합니다.'},
+{type:'mc',score:2,q:'2026년 연금보험료율은?',opts:['4.5%','6.0%','9.5%','12.0%'],a:2,exp:'자료 기준 2026년 연금보험료율은 9.5%입니다.'},
+{type:'mc',score:2,q:'연금보험료 업무처리 흐름에서 납입고지·징수를 담당하는 기관은?',opts:['국민연금공단','건강보험공단','고용노동부','지방자치단체'],a:1,exp:'국민연금공단이 결정·부과하고 건강보험공단이 납입고지·징수를 담당합니다.'},
+{type:'mc',score:2,q:'고지서 발송 시점과 납부기한 연결로 옳은 것은?',opts:['매월 22일경 발송, 다음 달 10일 납부기한','매월 1일 발송, 당월 5일 납부기한','분기 말 발송, 다음 분기 15일 납부기한','매월 15일 발송, 당월 말 납부기한'],a:0,exp:'고지서는 매월 22일경 발송되며 납부기한은 다음 달 10일입니다.'},
+{type:'mc',score:2,q:'연금보험료 연체금 설명으로 옳은 것은?',opts:['30일 이내 1일당 1/1500, 최고 2%','30일 이내 1일당 1/6000, 최고 10%','연체금은 부과하지 않음','무조건 보험료의 5%'],a:0,exp:'연체금은 30일 이내 1일당 1/1500, 최고 2%입니다.'},
+{type:'mc',score:2,q:'선납 대상에 해당하는 것은?',opts:['지역·임의·임의계속가입자','사업장 전체 근로자','법인사업장 사용자만','두루누리 대상자만'],a:0,exp:'선납은 지역·임의·임의계속가입자가 대상이며 사업장은 제외됩니다.'},
+{type:'mc',score:2,q:'분기납 대상은?',opts:['농어업인 지역(임의계속)가입자','모든 사업장가입자','조기노령연금 수급자','장애연금 수급자'],a:0,exp:'분기납 대상은 농어업인 지역가입자 또는 지역임의계속가입자입니다.'},
+{type:'mc',score:2,q:'소급분 분할납부의 최대 회차로 옳은 것은?',opts:['3회','10회','24회','60회'],a:1,exp:'소급분 분할납부는 최대 10회 균등분배가 가능합니다.'},
+{type:'mc',score:2,q:'차감잔액이 발생하는 경우로 적절한 것은?',opts:['소급 자격변동으로 고지금액이 감소할 때','소득이 증가해 보험료가 오른 때','연금 수급권이 발생한 때','신규 사업장 등록 때 항상'],a:0,exp:'차감잔액은 기준소득월액 하향, 납부예외, 소급상실 등으로 고지금액이 감소할 때 발생합니다.'},
+{type:'mc',score:2,q:'과오납 충당 순서 중 가장 먼저 충당하는 것은?',opts:['체납처분비','향후 1개월 보험료','미납 보험료','급여 환수금'],a:0,exp:'과오납 충당 순서는 체납처분비가 먼저입니다.'},
+{type:'mc',score:2,q:'반납금 신청 요건으로 옳은 것은?',opts:['반환일시금을 수령하고 가입 자격을 다시 취득','납부예외 기간만 있으면 가능','국외이주 중이면 자동 신청','60세 미만은 신청 불가'],a:0,exp:'반납금은 반환일시금 수령 후 가입 자격을 다시 취득한 경우 신청할 수 있습니다.'},
+{type:'mc',score:2,q:'반납금 분할횟수 설명으로 옳은 것은?',opts:['가입기간 1년 미만 3회, 1~5년 12회, 5년 이상 24회','모든 경우 60회','모든 경우 10회','가입기간과 무관하게 5회'],a:0,exp:'반납금은 가입기간에 따라 3회, 12회, 24회 분할납부가 가능합니다.'},
+{type:'mc',score:2,q:'추납보험료 신청 가능 최대 개월 수는?',opts:['36개월','60개월','119개월','240개월'],a:2,exp:'추납보험료는 최대 119개월, 즉 10년 미만 신청 가능합니다.'},
+{type:'mc',score:2,q:'추납 신청이 불가능한 상태는?',opts:['납부예외 중 또는 적용제외 중','신청월에 기준소득월액이 존재하는 납부 중 가입자','군복무 추납 가능 기간이 있는 가입자','적용제외 기간이 있는 납부 중 가입자'],a:0,exp:'추납은 납부 중 가입자가 신청할 수 있으며 납부예외 중·적용제외 중에는 신청할 수 없습니다.'},
+{type:'mc',score:2,q:'추납보험료 분할납부 최대 회차는?',opts:['10회','24회','36회','60회'],a:3,exp:'추납보험료는 최대 60회 분할납부가 가능합니다.'},
+{type:'mc',score:2,q:'두루누리 지원 대상의 기본 조건으로 옳은 것은?',opts:['10인 미만 사업장, 월소득 270만원 미만 사업장가입자','모든 지역가입자','농어업인 전원','구직급여 수급자 전원'],a:0,exp:'두루누리는 10인 미만 사업장의 월소득 270만원 미만 사업장가입자를 대상으로 합니다.'},
+{type:'mc',score:2,q:'지역가입자 보험료 지원제도의 지원 기간으로 옳은 것은?',opts:['최대 12개월','최대 36개월','제한 없음','생애 합산 60개월'],a:0,exp:'지역가입자 보험료 지원은 최대 12개월, 고지개월 수 기준입니다.'},
+{type:'mc',score:2,q:'실업크레딧 지원 수준으로 옳은 것은?',opts:['연금보험료 75% 지원, 본인 25% 부담','보험료 100% 지원','보험료 50% 지원, 본인 50% 부담','정액 50,350원 지원'],a:0,exp:'실업크레딧은 연금보험료 75%를 지원하고 본인은 25%를 부담합니다.'},
+{type:'short',score:4,q:'국민연금 가입자의 종류 중 당연적용에 해당하며 사업장이 아닌 개인 단위 가입자는? (한 단어)',answers:['지역가입자'],exp:'사업장가입자가 아닌 국내 거주 국민 중 요건을 충족하면 지역가입자입니다.'},
+{type:'short',score:4,q:'반환일시금을 수령한 뒤 가입자 자격을 다시 취득하여 가입기간을 복원하는 제도는? (한 단어)',answers:['반납금'],exp:'반환일시금 수령 후 자격 재취득 시 반납금을 신청하여 가입기간을 복원할 수 있습니다.'},
+{type:'short',score:4,q:'납부예외·적용제외 기간이 있는 납부 중 가입자가 보험료를 추가로 납부하는 제도는? (한 단어)',answers:['추납'],exp:'추납은 납부예외·적용제외 기간 등을 대상으로 추가 납부하는 제도입니다.'},
+{type:'short',score:4,q:'소급 자격변동으로 고지금액이 감소할 때 생성되는 금액은? (한 단어)',answers:['차감잔액'],exp:'고지금액 감소 시 소급분 감소금액이 차감잔액으로 생성됩니다.'},
+{type:'short',score:4,q:'구직급여 수급자의 국민연금 보험료 일부를 지원하는 제도는? (한 단어)',answers:['실업크레딧'],exp:'실업크레딧은 18~60세 미만 구직급여 수급자 중 가입기간이 있는 자를 지원합니다.'}
+];
+let idx=0; const ans=Array(questions.length).fill(null); const checked=Array(questions.length).fill(false); let time=3600;
+const quiz=document.getElementById('quiz'), nav=document.getElementById('nav');
+function norm(s){return (s||'').replace(/\s/g,'').trim().toLowerCase()}
+function renderNav(){nav.innerHTML='';questions.forEach((q,i)=>{const b=document.createElement('button');b.textContent=i+1;b.className=(i===idx?'active ':'')+(ans[i]!=null?'done':'');b.onclick=()=>{idx=i;render()};nav.appendChild(b)})}
+function render(){const q=questions[idx];document.getElementById('curNo').textContent=idx+1;document.getElementById('answered').textContent=ans.filter(x=>x!==null).length;renderNav();let html=`<div class="qhead"><div><span class="tag">${q.type==='mc'?'객관식':'주관식'}</span> <span class="tag scoretag">${q.score}점</span></div><div class="small">${idx+1} / ${questions.length}</div></div><div class="question">${idx+1}. ${q.q}</div>`;
+if(q.type==='mc'){html+=`<div class="opts">`;q.opts.forEach((o,i)=>{let cls='opt'; if(ans[idx]===i) cls+=' selected'; if(checked[idx]&&i===q.a) cls+=' correct'; if(checked[idx]&&ans[idx]===i&&i!==q.a) cls+=' wrong'; html+=`<button class="${cls}" onclick="choose(${i})">${['①','②','③','④'][i]} ${o}</button>`});html+=`</div>`}else{html+=`<input type="text" id="shortAns" placeholder="정답 한 단어 입력" value="${ans[idx]||''}" oninput="ans[${idx}]=this.value;renderNav();document.getElementById('answered').textContent=ans.filter(x=>x!==null).length"><div class="controls"><button onclick="checkShort()">정답 확인</button></div>`}
+let ex=''; if(checked[idx]){const ok=isCorrect(idx);ex=`<div class="explain ${ok?'ok':'bad'}"><b>${ok?'정답입니다.':'오답입니다.'}</b><br>${ok?'해설':'오답 이유'}: ${q.exp}<br><span class="small">정답: ${q.type==='mc'?q.opts[q.a]:q.answers[0]}</span></div>`} else ex=`<div class="explain"></div>`;
+html+=ex+`<div class="controls"><button class="secondary" onclick="prev()" ${idx===0?'disabled':''}>이전</button><button onclick="next()" ${idx===questions.length-1?'disabled':''}>다음</button><button class="submit" onclick="finish()">제출</button></div>`;quiz.innerHTML=html}
+function choose(i){ans[idx]=i;checked[idx]=true;render()}
+function checkShort(){const v=document.getElementById('shortAns').value;ans[idx]=v||'';checked[idx]=true;render()}
+function isCorrect(i){const q=questions[i]; if(q.type==='mc') return ans[i]===q.a; return q.answers.some(a=>norm(a)===norm(ans[i]))}
+function prev(){if(idx>0){idx--;render()}} function next(){if(idx<questions.length-1){idx++;render()}}
+function finish(){let score=0, correct=0;questions.forEach((q,i)=>{checked[i]=true;if(isCorrect(i)){score+=q.score;correct++}});render();document.getElementById('result').style.display='block';document.getElementById('result').innerHTML=`<div class="result"><b>최종 점수: ${score}점 / 100점</b><br>정답 수: ${correct}문항 / ${questions.length}문항<br><span class="small">오답 문항은 번호를 눌러 해설을 확인하세요.</span></div>`;window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}) }
+setInterval(()=>{if(time>0){time--;let m=String(Math.floor(time/60)).padStart(2,'0'),s=String(time%60).padStart(2,'0');document.getElementById('timer').textContent=`${m}:${s}`}else{finish()}},1000);
+render();
+</script>
+</body>
+</html>
